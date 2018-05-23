@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,16 +20,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/round_button"
             android:text="One Joke"
-            android:textColor="#FFFFFF" />
+            style="@style/main_button" />
 
         <TextView
+            android:id="@+id/one_text_field"
+            style="@style/joke"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            tools:text="Hello World!"
-            style="@style/joke" />
+            tools:text="Hello World!" />
 
     </LinearLayout>
 
@@ -43,34 +44,63 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/round_button"
+            style="@style/main_button"
+            android:onClick="onClickThreeJokes"
             android:text="Three Jokes"
-            android:textColor="#FFFFFF" />
+           />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginLeft="5dp"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/three_text_field_first"
+                style="@style/joke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/joke"
                 tools:text="Hello World!" />
 
             <TextView
+                android:id="@+id/three_text_field_second"
+                style="@style/joke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/joke"
                 tools:text="Hello World!" />
 
             <TextView
+                android:id="@+id/three_text_field_third"
+                style="@style/joke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/joke"
                 tools:text="Hello World!" />
         </LinearLayout>
     </LinearLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="5dp">
+
+        <Button
+            android:id="@+id/button"
+            style="@style/main_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:text="fox picture" />
+
+        <ImageView
+            android:layout_width="219dp"
+            android:layout_height="290dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            />
+        
+    </android.support.constraint.ConstraintLayout>
 </LinearLayout>

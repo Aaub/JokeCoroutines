@@ -15,5 +15,10 @@
         <item name="android:textColor">@color/light_grey</item>
     </style>
 
+    <style name="main_button">
+        <item name="android:background">@drawable/round_button</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
 
 </resources>
