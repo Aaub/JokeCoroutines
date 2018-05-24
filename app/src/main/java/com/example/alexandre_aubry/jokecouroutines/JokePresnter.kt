@@ -1,6 +1,8 @@
 package com.example.alexandre_aubry.jokecouroutines
 
+import android.util.Log
 import com.example.alexandre_aubry.jokecouroutines.retrofit.JokeApiServiceFactory
+import kotlinx.coroutines.experimental.async
 
 
 class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
@@ -17,26 +19,20 @@ class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
         mViewInterface.setPresenter(this)
     }
 
-    override fun start() {
-
-    }
-
     override fun getJoke(){
-//       runBlocking {
-//           async {
-//               var deferred = jokeApiService.getRandomJoke().await()
-//               Log.w(TAG, "deferred : $deferred")
+        async {
+            var deferred = jokeApiService.getRandomJoke().await()
+            Log.w(TAG, "deferred : $deferred")
 //           joke = deferred.joke
 //           Log.w(TAG, "joke : $joke")
 //            val jokeStr = joke.jokeText
 //           Log.w(TAG, "joke text : $joke")
 //            mViewInterface.setOneJokeText(jokeStr)
-//           }
-//        }
+        }
     }
 
    suspend fun getAsyncJokes(): List<Joke>? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       return null
     }
 
 }

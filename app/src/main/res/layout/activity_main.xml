@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,7 +23,7 @@
             style="@style/main_button" />
 
         <TextView
-            android:id="@+id/one_text_field"
+            android:id="@+id/one_joke_text_field"
             style="@style/joke"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -45,7 +44,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             style="@style/main_button"
-            android:onClick="onClickThreeJokes"
             android:text="Three Jokes"
            />
 
@@ -57,21 +55,21 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/three_text_field_first"
+                android:id="@+id/three_jokes_text_field_first"
                 style="@style/joke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Hello World!" />
 
             <TextView
-                android:id="@+id/three_text_field_second"
+                android:id="@+id/three_jokes_text_field_second"
                 style="@style/joke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Hello World!" />
 
             <TextView
-                android:id="@+id/three_text_field_third"
+                android:id="@+id/three_jokes_text_field_third"
                 style="@style/joke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
