@@ -3,7 +3,8 @@ package com.example.alexandre_aubry.jokecouroutines
 class Contract{
 
     interface JokePresenterInterface {
-        fun getJoke()
+        fun getJokeWithAsync()
+        fun getJokeWithLaunchOnly()
     }
 
     interface MainViewInterface{

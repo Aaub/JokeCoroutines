@@ -40,14 +40,12 @@ class MainActivity : AppCompatActivity(), Contract.MainViewInterface {
     }
 
     fun onClickOneJoke() {
-        mPresenter.getJoke()
+        mPresenter.getJokeWithAsync()
 
     }
 
     fun onClickThreeJokes() {
-        mThreeJokesFirstTextView.text = "IT IS"
-        mThreeJokesSecondTextView.text = "A"
-        mThreeJokesThirdTextView.text = "TEST"
+        mPresenter.getJokeWithLaunchOnly()
     }
 
     override fun setOneJokeText(text: String) {
