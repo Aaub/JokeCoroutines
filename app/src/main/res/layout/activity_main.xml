@@ -83,13 +83,13 @@
         android:layout_margin="5dp">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/stop_reception"
             style="@style/main_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="17dp"
             android:paddingRight="17dp"
-            android:text="fox picture" />
+            android:text="stop reception" />
 
         <ImageView
             android:layout_width="219dp"

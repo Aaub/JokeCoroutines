@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity(), Contract.MainViewInterface {
     private lateinit var mThreeJokesThirdTextView: TextView
     private lateinit var mOneJokeButton: Button
     private lateinit var mThreeJokesButton: Button
+    private lateinit var mStopReception: Button
     private val TAG = "MAIN_ACTIVITY"
 
 
@@ -31,12 +32,15 @@ class MainActivity : AppCompatActivity(), Contract.MainViewInterface {
 
         mOneJokeButton = findViewById(R.id.one_joke_button)
         mThreeJokesButton = findViewById(R.id.three_joke_button)
+        mStopReception = findViewById(R.id.stop_reception)
+
         setupOnClickListeners()
     }
 
     fun setupOnClickListeners() {
         mOneJokeButton.setOnClickListener { onClickOneJoke() }
         mThreeJokesButton.setOnClickListener { onClickThreeJokes() }
+        mStopReception.setOnClickListener { onClickStopReception() }
     }
 
     fun onClickOneJoke() {
@@ -45,8 +49,14 @@ class MainActivity : AppCompatActivity(), Contract.MainViewInterface {
     }
 
     fun onClickThreeJokes() {
-        mPresenter.getJokeWithLaunchOnly()
+        mPresenter.getAsyncJokes()
     }
+
+    fun onClickStopReception() {
+        mPresenter.stopReception()
+    }
+
+
 
     override fun setOneJokeText(text: String) {
         mOneJokeTextView.text = text

@@ -5,6 +5,8 @@ class Contract{
     interface JokePresenterInterface {
         fun getJokeWithAsync()
         fun getJokeWithLaunchOnly()
+        fun getAsyncJokes()
+        fun stopReception()
     }
 
     interface MainViewInterface{
