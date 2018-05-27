@@ -1,27 +1,27 @@
 package com.example.alexandre_aubry.jokecouroutines
 
+import android.widget.Toast
 import com.example.alexandre_aubry.jokecouroutines.retrofit.JokeApiResponse
 import com.example.alexandre_aubry.jokecouroutines.retrofit.JokeApiServiceFactory
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.Channel
 import kotlinx.coroutines.experimental.channels.consumeEach
+import java.io.IOException
 import kotlin.coroutines.experimental.CoroutineContext
 
 
 class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
     val TAG = "JOKE_PRESENTER"
     private val mUiContext: CoroutineContext = UI
-    private val mBgContext: CoroutineContext = CommonPool
-    var mView: MainActivity = view
-    var mChannel = Channel<Joke>()
+    private val mBgContext: CoroutineContext = newSingleThreadContext("MyOwnThread")
+    private var mView: MainActivity = view
+    private var mChannel = Channel<Pair<Int, Joke>>()
     private var mUserWantToReceive = true
 
-    private val jokeApiService by lazy {
+    private val mJokeApiService by lazy {
         JokeApiServiceFactory.createService()
     }
-
-    private lateinit var mJoke: Joke
 
 
     init {
@@ -30,21 +30,29 @@ class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
 
     override fun getJokeWithLaunchOnly() {
         launch(mUiContext) {
-            val jokeStr = getJokeFromApi().await().joke.jokeText
-            val map = mapOf(Pair(1, jokeStr))
-            mView.setThreeTexts(map)
+            try {
+                val jokeStr = getJokeFromApi().await().joke.jokeText
+                mView.setOneJokeText(jokeStr)
+            } catch (iOE: IOException) {
+                Toast.makeText(mView.applicationContext, "Could not fetch a joke", Toast.LENGTH_SHORT).show()
+            }
         }
 
+    }
+
+    private fun getJokeFromApi(): Deferred<JokeApiResponse> {
+        return async { mJokeApiService.getRandomJoke().await() }
     }
 
     override fun getJokeWithAsync() {
         launch(mUiContext) {
-            val jokeStr = jokeApiService.getRandomJoke().await().joke.jokeText
-            mView.setOneJokeText(jokeStr)
+            try {
+                val jokeStr = mJokeApiService.getRandomJoke().await().joke.jokeText
+                mView.setOneJokeText(jokeStr)
+            } catch (iOE: IOException) {
+                Toast.makeText(mView.applicationContext, "Could not fetch a joke", Toast.LENGTH_SHORT).show()
+            }
         }
-    }
-    private fun getJokeFromApi(): Deferred<JokeApiResponse> {
-        return async { jokeApiService.getRandomJoke().await() }
     }
 
     override fun getAsyncJokes() {
@@ -52,22 +60,37 @@ class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
         getAsyncJokesFromApi()
         launch(mUiContext) {
             mChannel.consumeEach {
-                val map = mapOf(Pair(1, mChannel.receive().jokeText))
-                mView.setThreeTexts(map)
+                val pair = mChannel.receive()
+                val key = pair.first
+                val joke = pair.second.jokeText
+                mView.setThreeTexts(Pair(key, joke))
             }
         }
     }
 
     fun getAsyncJokesFromApi() {
-        launch(mBgContext) {
+        launch(mUiContext) {
+            var key = 0
             while (mUserWantToReceive) {
-                mChannel.send(jokeApiService.getRandomJoke().await().joke)
-                delay(1000)
+                if (key > 2) {
+                    key = 0
+                }
+                val joke = mJokeApiService.getRandomJoke().await().joke
+                val pair = Pair(key, joke)
+                mChannel.send(pair)
+                key++
+
+                delay(700)
             }
         }
     }
 
     override fun stopReception() {
         mUserWantToReceive = false
+
+        /* mChannel.cancel() ou mChannel.close()
+
+        * Fonctionne mais coupe le chanel ce qui le rend inutilisable
+        * */
     }
 }

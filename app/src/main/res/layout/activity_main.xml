@@ -16,36 +16,41 @@
 
         <Button
             android:id="@+id/one_joke_button"
+            style="@style/main_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="One Joke"
-            style="@style/main_button" />
+            android:text="One Joke" />
 
-        <TextView
-            android:id="@+id/one_joke_text_field"
-            style="@style/joke"
+        <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="2"
-            tools:text="Hello World!" />
+            android:layout_height="100dp">
+
+            <TextView
+                android:id="@+id/one_joke_text_field"
+                style="@style/joke"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:text="Hello World!" />
+        </FrameLayout>
+
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/three_joke_block"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp">
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/three_joke_button"
+            style="@style/main_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            style="@style/main_button"
-            android:text="Three Jokes"
-           />
+            android:layout_marginTop="130dp"
+            android:text="Three Jokes" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -58,47 +63,36 @@
                 android:id="@+id/three_jokes_text_field_first"
                 style="@style/joke"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 tools:text="Hello World!" />
+
+            <include layout="@layout/separator" />
 
             <TextView
                 android:id="@+id/three_jokes_text_field_second"
                 style="@style/joke"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 tools:text="Hello World!" />
+
+            <include layout="@layout/separator" />
 
             <TextView
                 android:id="@+id/three_jokes_text_field_third"
                 style="@style/joke"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 tools:text="Hello World!" />
         </LinearLayout>
     </LinearLayout>
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="5dp">
 
-        <Button
-            android:id="@+id/stop_reception"
-            style="@style/main_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="17dp"
-            android:paddingRight="17dp"
-            android:text="stop reception" />
+    <Button
+        android:id="@+id/stop_reception"
+        style="@style/main_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="stop reception" />
 
-        <ImageView
-            android:layout_width="219dp"
-            android:layout_height="290dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
-            />
-        
-    </android.support.constraint.ConstraintLayout>
 </LinearLayout>

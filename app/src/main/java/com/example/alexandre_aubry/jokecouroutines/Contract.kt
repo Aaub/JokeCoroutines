@@ -11,7 +11,7 @@ class Contract{
 
     interface MainViewInterface{
         fun setOneJokeText(text : String)
-        fun setThreeTexts(texts : Map<Int, String>)
+        fun setThreeTexts(jokePair: Pair<Int, String>)
         fun setPresenter(presenter : JokePresenter)
     }
 }

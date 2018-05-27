@@ -57,18 +57,15 @@ class MainActivity : AppCompatActivity(), Contract.MainViewInterface {
     }
 
 
-
     override fun setOneJokeText(text: String) {
         mOneJokeTextView.text = text
     }
 
-    override fun setThreeTexts(texts: Map<Int, String>) {
-        for (key in texts.keys) {
-            when (key) {
-                0 -> mThreeJokesFirstTextView.text = texts[key]
-                1 -> mThreeJokesSecondTextView.text = texts[key]
-                2 -> mThreeJokesThirdTextView.text = texts[key]
-            }
+    override fun setThreeTexts(jokePair: Pair<Int, String>) {
+        when (jokePair.first) {
+            0 -> mThreeJokesFirstTextView.text = jokePair.second
+            1 -> mThreeJokesSecondTextView.text = jokePair.second
+            2 -> mThreeJokesThirdTextView.text = jokePair.second
         }
 
     }
