@@ -2,71 +2,51 @@ package com.example.alexandre_aubry.jokecouroutines
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Button
-import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), Contract.MainViewInterface {
 
     private var mPresenter = JokePresenter(this)
-    private lateinit var mOneJokeTextView: TextView
-    private lateinit var mThreeJokesFirstTextView: TextView
-    private lateinit var mThreeJokesSecondTextView: TextView
-    private lateinit var mThreeJokesThirdTextView: TextView
-    private lateinit var mOneJokeButton: Button
-    private lateinit var mThreeJokesButton: Button
-    private lateinit var mStopReception: Button
-    private val TAG = "MAIN_ACTIVITY"
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupViews()
-    }
-
-    fun setupViews() {
-        mOneJokeTextView = findViewById(R.id.one_joke_text_field)
-        mThreeJokesFirstTextView = findViewById(R.id.three_jokes_text_field_first)
-        mThreeJokesSecondTextView = findViewById(R.id.three_jokes_text_field_second)
-        mThreeJokesThirdTextView = findViewById(R.id.three_jokes_text_field_third)
-
-        mOneJokeButton = findViewById(R.id.one_joke_button)
-        mThreeJokesButton = findViewById(R.id.three_joke_button)
-        mStopReception = findViewById(R.id.stop_reception)
-
         setupOnClickListeners()
     }
 
-    fun setupOnClickListeners() {
-        mOneJokeButton.setOnClickListener { onClickOneJoke() }
-        mThreeJokesButton.setOnClickListener { onClickThreeJokes() }
-        mStopReception.setOnClickListener { onClickStopReception() }
+    private fun setupOnClickListeners() {
+        one_joke_button.setOnClickListener { onClickOneJoke() }
+        three_joke_button.setOnClickListener { onClickThreeJokes() }
+        stop_reception.setOnClickListener { onClickStopReception() }
     }
 
-    fun onClickOneJoke() {
+    private fun onClickOneJoke() {
         mPresenter.getJokeWithAsync()
 
     }
 
-    fun onClickThreeJokes() {
+    private fun onClickThreeJokes() {
         mPresenter.getAsyncJokes()
     }
 
-    fun onClickStopReception() {
+    private fun onClickStopReception() {
         mPresenter.stopReception()
     }
 
 
     override fun setOneJokeText(text: String) {
-        mOneJokeTextView.text = text
+        one_joke_text_field.text = text
     }
 
     override fun setThreeTexts(jokePair: Pair<Int, String>) {
         when (jokePair.first) {
-            0 -> mThreeJokesFirstTextView.text = jokePair.second
-            1 -> mThreeJokesSecondTextView.text = jokePair.second
-            2 -> mThreeJokesThirdTextView.text = jokePair.second
-        }
+            0 -> three_jokes_text_field_first
+            1 -> three_jokes_text_field_second
+            2 -> three_jokes_text_field_third
+            else -> three_jokes_text_field_third
+        }.text = jokePair.second
 
     }
 

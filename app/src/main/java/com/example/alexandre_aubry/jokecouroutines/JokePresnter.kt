@@ -1,5 +1,6 @@
 package com.example.alexandre_aubry.jokecouroutines
 
+import android.util.Log
 import android.widget.Toast
 import com.example.alexandre_aubry.jokecouroutines.retrofit.JokeApiResponse
 import com.example.alexandre_aubry.jokecouroutines.retrofit.JokeApiServiceFactory
@@ -16,7 +17,7 @@ class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
     private val mUiContext: CoroutineContext = UI
     private val mBgContext: CoroutineContext = newSingleThreadContext("MyOwnThread")
     private var mView: MainActivity = view
-    private var mChannel = Channel<Pair<Int, Joke>>()
+    private var mChannel = Channel<Pair<Int, Joke>>(5)
     private var mUserWantToReceive = true
 
     private val mJokeApiService by lazy {
@@ -62,6 +63,7 @@ class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
             mChannel.consumeEach {
                 val pair = mChannel.receive()
                 val key = pair.first
+                Log.w(TAG, "KEY OF THE JOKE : $key")
                 val joke = pair.second.jokeText
                 mView.setThreeTexts(Pair(key, joke))
             }
@@ -69,8 +71,8 @@ class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
     }
 
     fun getAsyncJokesFromApi() {
-        launch(mUiContext) {
-            var key = 0
+        launch(mBgContext) {
+            var key = 1
             while (mUserWantToReceive) {
                 if (key > 2) {
                     key = 0
@@ -89,7 +91,6 @@ class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
         mUserWantToReceive = false
 
         /* mChannel.cancel() ou mChannel.close()
-
         * Fonctionne mais coupe le chanel ce qui le rend inutilisable
         * */
     }
