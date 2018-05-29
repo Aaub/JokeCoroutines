@@ -6,19 +6,21 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@android:color/tertiary_text_light</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="joke">
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:gravity">start</item>
-        <item name="android:textColor">@color/light_grey</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <style name="main_button">
         <item name="android:background">@drawable/round_button</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:elevation">1dp</item>
     </style>
-
 
 </resources>
