@@ -89,13 +89,8 @@ class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
 
     override fun stopReception() {
         mUserWantToReceive = false
-
-        /* mChannel.close()
+        /* mChannel.close() or *  mChannel.cancel()
         *       Work but close the channel which mean we can't use it anymore
-        *
-        *  mChannel.cancel()
-        *       Make the crashing because when it want to receive() from the channel , this one
-        *       doesn't exist anymore
         * */
     }
 }
