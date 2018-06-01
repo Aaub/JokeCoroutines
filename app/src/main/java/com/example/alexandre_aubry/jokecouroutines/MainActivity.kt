@@ -1,8 +1,6 @@
 package com.example.alexandre_aubry.jokecouroutines
 
-import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -11,21 +9,18 @@ class MainActivity : AppCompatActivity(), Contract.MainViewInterface {
     private var mPresenter = JokePresenter(this)
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupOnClickListeners()
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun setupOnClickListeners() {
         one_joke_button.setOnClickListener { onClickOneJoke() }
         three_joke_button.setOnClickListener { onClickThreeJokes() }
         stop_reception.setOnClickListener { onClickStopReception() }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun onClickOneJoke() {
         // one_joke_progress_bar.setProgress(10, true)
         mPresenter.getJokeWithAsync()
