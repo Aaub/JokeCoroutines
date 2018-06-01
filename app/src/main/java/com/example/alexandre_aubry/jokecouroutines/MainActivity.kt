@@ -2,11 +2,13 @@ package com.example.alexandre_aubry.jokecouroutines
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), Contract.MainViewInterface {
 
     private var mPresenter = JokePresenter(this)
+    private val TAG = "MAIN_ACTIVITY"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,9 @@ class MainActivity : AppCompatActivity(), Contract.MainViewInterface {
         mPresenter.stopReception()
     }
 
+    override fun showToast() {
+        Toast.makeText(applicationContext, "Could not fetch a joke", Toast.LENGTH_SHORT).show()
+    }
 
     override fun setOneJokeText(text: String) {
         one_joke_text_field.text = text

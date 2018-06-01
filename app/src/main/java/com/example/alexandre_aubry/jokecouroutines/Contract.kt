@@ -13,5 +13,6 @@ class Contract{
         fun setOneJokeText(text : String)
         fun setThreeTexts(jokePair: Pair<Int, String>)
         fun setPresenter(presenter : JokePresenter)
+        fun showToast()
     }
 }

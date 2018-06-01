@@ -1,7 +1,6 @@
 package com.example.alexandre_aubry.jokecouroutines
 
 import android.util.Log
-import android.widget.Toast
 import com.example.alexandre_aubry.jokecouroutines.retrofit.JokeApiResponse
 import com.example.alexandre_aubry.jokecouroutines.retrofit.JokeApiServiceFactory
 import kotlinx.coroutines.experimental.*
@@ -35,7 +34,7 @@ class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
                 val jokeStr = getJokeFromApi().await().joke.jokeText
                 mView.setOneJokeText(jokeStr)
             } catch (iOE: IOException) {
-                Toast.makeText(mView.applicationContext, "Could not fetch a joke", Toast.LENGTH_SHORT).show()
+                mView.showToast()
             }
         }
 
@@ -51,7 +50,7 @@ class JokePresenter(view: MainActivity) : Contract.JokePresenterInterface {
                 val jokeStr = mJokeApiService.getRandomJoke().await().joke.jokeText
                 mView.setOneJokeText(jokeStr)
             } catch (iOE: IOException) {
-                Toast.makeText(mView.applicationContext, "Could not fetch a joke", Toast.LENGTH_SHORT).show()
+                mView.showToast()
             }
         }
     }
